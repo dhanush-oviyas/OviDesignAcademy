@@ -1,3 +1,8 @@
+// Resolve generated links and assets from the folder that contains this shared
+// script. This works both on the live domain and when pages are opened locally.
+const OVI_SITE_ROOT = new URL(".", document.currentScript?.src || document.baseURI);
+const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI_SITE_ROOT).href;
+
 // ---------- Broken-page fallback ----------
 // Apache handles real 404 responses through .htaccess. This guard also covers
 // static hosts that return index.html for an unknown URL, and bad local links.
@@ -20,6 +25,8 @@
 
   const normalizePath = (pathname) => {
     const decoded = decodeURIComponent(pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
+    if (decoded === "/index.html") return "/";
+    if (decoded.endsWith("/index.html")) return decoded.slice(0, -"index.html".length);
     if (decoded === "/" || decoded.endsWith(".html")) return decoded;
     return decoded.endsWith("/") ? decoded : `${decoded}/`;
   };
@@ -56,6 +63,7 @@
   // Catch broken same-site page links before the browser opens them.
   document.addEventListener("click", (event) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (window.location.protocol === "file:") return;
 
     const link = event.target.closest("a[href]");
     if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
@@ -1042,7 +1050,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="promo-modal__media">
-          <img class="promo-modal__image" src="${campaign.image}" alt="${campaign.imageAlt || campaign.title || "Ovi Design Academy promotion"}" fetchpriority="high" />
+          <img class="promo-modal__image" src="${oviSiteUrl(campaign.image)}" alt="${campaign.imageAlt || campaign.title || "Ovi Design Academy promotion"}" fetchpriority="high" />
         </div>
         <div class="promo-modal__content">
           <span class="promo-modal__eyebrow">${campaign.eyebrow || "Limited-time offer"}</span>
@@ -1545,7 +1553,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return `
       <article class="student-work-card reveal">
         <div class="work-thumb">
-          <img src="${project.img}" alt="${project.pt} case study thumbnail by ${studentName}" loading="lazy" />
+          <img src="${oviSiteUrl(project.img)}" alt="${project.pt} case study thumbnail by ${studentName}" loading="lazy" />
         </div>
         <div class="work-card-top">
           <span class="work-course">${courseLabel}</span>
@@ -1596,7 +1604,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : fallbackLogos;
     const logos = logoItems.map((company) => `
       <span class="logo-name">
-        <img src="${company.src}" alt="${company.name} placement logo" loading="lazy" />
+        <img src="${oviSiteUrl(company.src)}" alt="${company.name} placement logo" loading="lazy" />
       </span>`).join("");
     el.innerHTML = `
       <div class="logos-track">${logos}</div>
@@ -1649,7 +1657,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return "/courses/compare-ui-ux-courses/";
     };
     el.innerHTML = courseCrossSell.map((course) => `
-      <a href="${getCourseHref(course)}" class="rel-card rel-${course.cls}">
+      <a href="${oviSiteUrl(getCourseHref(course))}" class="rel-card rel-${course.cls}">
         <div class="rel-top">
           <span class="rel-tag">${course.tag}</span>
           ${Icon.arrow()}
@@ -1789,7 +1797,7 @@ document.addEventListener("DOMContentLoaded", () => {
     description.textContent = slide.description;
     primaryText.textContent = slide.primaryText || "Start Your Free Demo";
     secondaryText.textContent = slide.secondaryText || "Explore Courses";
-    secondary.href = slide.secondaryHref || "/courses/";
+    secondary.href = slide.secondaryHref || oviSiteUrl("courses/index.html");
 
     if (slide.secondaryExternal) {
       secondary.target = "_blank";
