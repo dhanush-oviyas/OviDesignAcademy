@@ -1,3 +1,23 @@
+// Resolve generated links and assets from the folder that contains this shared
+// script. This works both on the live domain and when pages are opened locally.
+const OVI_SITE_ROOT = new URL(".", document.currentScript?.src || document.baseURI);
+const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI_SITE_ROOT).href;
+const normalizeOviPath = (pathname) => {
+  const decoded = decodeURIComponent(pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
+  if (decoded === "/index.html") return "/";
+  if (decoded.endsWith("/index.html")) return decoded.slice(0, -"index.html".length);
+  if (decoded === "/" || decoded.endsWith(".html")) return decoded;
+  return decoded.endsWith("/") ? decoded : `${decoded}/`;
+};
+const OVI_SITE_BASE_PATH = normalizeOviPath(OVI_SITE_ROOT.pathname);
+const toOviSitePath = (pathname) => {
+  const normalized = normalizeOviPath(pathname);
+  if (OVI_SITE_BASE_PATH !== "/" && normalized.startsWith(OVI_SITE_BASE_PATH)) {
+    return normalized.slice(OVI_SITE_BASE_PATH.length - 1) || "/";
+  }
+  return normalized;
+};
+
 // ---------- Broken-page fallback ----------
 // Apache handles real 404 responses through .htaccess. This guard also covers
 // static hosts that return index.html for an unknown URL, and bad local links.
@@ -10,6 +30,7 @@
     "/courses/ui-ux-design-course-chennai/",
     "/courses/advanced-ui-ux-ai-leadership/",
     "/courses/compare-ui-ux-courses/",
+    "/unused/demo-class/",
     "/about/",
     "/student-work/",
     "/life-at-ovi/",
@@ -18,14 +39,8 @@
     "/404.html"
   ]);
 
-  const normalizePath = (pathname) => {
-    const decoded = decodeURIComponent(pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
-    if (decoded === "/" || decoded.endsWith(".html")) return decoded;
-    return decoded.endsWith("/") ? decoded : `${decoded}/`;
-  };
-
   const isValidPage = (pathname) => {
-    const normalized = normalizePath(pathname);
+    const normalized = toOviSitePath(pathname);
     return validPaths.has(normalized) || normalized.startsWith("/blog/");
   };
   const isPageUrl = (pathname) => {
@@ -34,15 +49,15 @@
   };
 
   const notFoundUrl = () => {
-    // Keep local file previews working, but use the domain root in production.
+    // Keep local file previews working, and respect hosted subfolders in production.
     if (window.location.protocol === "file:") {
       return new URL("404.html", document.baseURI).href;
     }
-    return new URL("/404.html", window.location.origin).href;
+    return new URL("404.html", OVI_SITE_ROOT).href;
   };
 
   const redirectTo404 = () => {
-    if (window.location.pathname.toLowerCase() !== "/404.html") {
+    if (toOviSitePath(window.location.pathname) !== "/404.html") {
       window.location.replace(notFoundUrl());
     }
   };
@@ -56,6 +71,7 @@
   // Catch broken same-site page links before the browser opens them.
   document.addEventListener("click", (event) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    if (window.location.protocol === "file:") return;
 
     const link = event.target.closest("a[href]");
     if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
@@ -1029,7 +1045,7 @@ document.querySelectorAll(".news-form").forEach((form) => {
 // ---------- Reusable promotional banner popup ----------
 document.addEventListener("DOMContentLoaded", () => {
   const campaign = window.oviPromoBanner || PROMO_BANNER;
-  if (!campaign || !campaign.enabled || !campaign.image) {
+  if (document.body.classList.contains("demo-landing-page") || !campaign || !campaign.enabled || !campaign.image) {
     return;
   }
 
@@ -1042,7 +1058,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
         </button>
         <div class="promo-modal__media">
-          <img class="promo-modal__image" src="${campaign.image}" alt="${campaign.imageAlt || campaign.title || "Ovi Design Academy promotion"}" fetchpriority="high" />
+          <img class="promo-modal__image" src="${oviSiteUrl(campaign.image)}" alt="${campaign.imageAlt || campaign.title || "Ovi Design Academy promotion"}" fetchpriority="high" />
         </div>
         <div class="promo-modal__content">
           <span class="promo-modal__eyebrow">${campaign.eyebrow || "Limited-time offer"}</span>
@@ -1545,7 +1561,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return `
       <article class="student-work-card reveal">
         <div class="work-thumb">
-          <img src="${project.img}" alt="${project.pt} case study thumbnail by ${studentName}" loading="lazy" />
+          <img src="${oviSiteUrl(project.img)}" alt="${project.pt} case study thumbnail by ${studentName}" loading="lazy" />
         </div>
         <div class="work-card-top">
           <span class="work-course">${courseLabel}</span>
@@ -1596,7 +1612,7 @@ document.addEventListener("DOMContentLoaded", () => {
       : fallbackLogos;
     const logos = logoItems.map((company) => `
       <span class="logo-name">
-        <img src="${company.src}" alt="${company.name} placement logo" loading="lazy" />
+        <img src="${oviSiteUrl(company.src)}" alt="${company.name} placement logo" loading="lazy" />
       </span>`).join("");
     el.innerHTML = `
       <div class="logos-track">${logos}</div>
@@ -1649,7 +1665,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return "/courses/compare-ui-ux-courses/";
     };
     el.innerHTML = courseCrossSell.map((course) => `
-      <a href="${getCourseHref(course)}" class="rel-card rel-${course.cls}">
+      <a href="${oviSiteUrl(getCourseHref(course))}" class="rel-card rel-${course.cls}">
         <div class="rel-top">
           <span class="rel-tag">${course.tag}</span>
           ${Icon.arrow()}
@@ -1789,7 +1805,7 @@ document.addEventListener("DOMContentLoaded", () => {
     description.textContent = slide.description;
     primaryText.textContent = slide.primaryText || "Start Your Free Demo";
     secondaryText.textContent = slide.secondaryText || "Explore Courses";
-    secondary.href = slide.secondaryHref || "/courses/";
+    secondary.href = slide.secondaryHref || oviSiteUrl("courses/index.html");
 
     if (slide.secondaryExternal) {
       secondary.target = "_blank";

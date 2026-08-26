@@ -25,6 +25,7 @@ ErrorDocument 404 /404.html
   RewriteRule ^contact\.html$ /contact/ [R=301,L,NC]
   RewriteRule ^life-at-ovi\.html$ /life-at-ovi/ [R=301,L,NC]
   RewriteRule ^all-design-courses/?$ /courses/ [R=301,L,NC]
+  RewriteRule ^demo-class\.html$ /demo-class/ [R=301,L,NC]
 
   # Retire the indexed WordPress /new/ section without creating new duplicates.
   RewriteRule ^new/?$ / [R=301,L,NC]
@@ -42,7 +43,7 @@ ErrorDocument 404 /404.html
 
 # Production security headers (requires mod_headers).
 <IfModule mod_headers.c>
-  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://docs.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.instagram.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://docs.google.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.instagram.com; frame-src https://www.google.com https://www.youtube.com https://www.instagram.com; media-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
+  Header always set Content-Security-Policy "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self' https://docs.google.com; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.instagram.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com https://cdn.jsdelivr.net; img-src 'self' data: https:; connect-src 'self' https://docs.google.com https://www.google-analytics.com https://*.google-analytics.com https://www.googletagmanager.com https://www.instagram.com; frame-src https://www.google.com https://www.youtube.com https://www.instagram.com; media-src 'self'; manifest-src 'self'; upgrade-insecure-requests"
   Header always set Referrer-Policy "strict-origin-when-cross-origin"
   Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
   Header always set X-Content-Type-Options "nosniff"
