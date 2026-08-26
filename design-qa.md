@@ -1,95 +1,55 @@
-<<<<<<< ours
-# Design QA — Interactive Ovi 404 Page
+# Design QA — Choices Section
 
-- Source visual truth: latest user-provided full-width 404 placement reference in the conversation, refined by the request for shared site chrome, separate image elements, and subtle motion.
-- Brand grounding: the shared header and footer from `about-ovi-design-academy-chennai.html`, existing `styles.css` tokens, Space Grotesk/Inter typography, and the Ovi logo.
-- Implementation: `404.html`, the final 404 styles in `styles.css`, and five layered image assets under `image/ovi-404-*.png`.
-- Implementation screenshot: unavailable because no in-app or connected browser surface was available.
-- Intended desktop viewport: 1440 × 900 CSS pixels at 1× density.
-- Intended mobile viewport: 390 × 844 CSS pixels at 1× density.
-- Source pixels: 2048 × 1153 as supplied in the conversation.
-- Generated asset pixels: 404 sculpture 1536 × 1024; astronaut 1254 × 1254; tools 1254 × 1254; direction sign 1254 × 1254; moon foreground 1672 × 941.
-- Implementation pixels and density normalization: unavailable because browser rendering was blocked.
-- State: missing URL response, default page state, pointer-parallax enabled.
+- Source visual truth: `C:\Users\dhanush\Downloads\screencapture-coachx-tamilbusinesstribe-2026-08-24-15_24_55.png`
+- Normalized source crop: `C:\Users\dhanush\OneDrive\Desktop\projects\ovi-design-academy\design-qa\choices-source-reference.png`
+- Implementation screenshot: `C:\Users\dhanush\OneDrive\Desktop\projects\ovi-design-academy\design-qa\choices-implementation-desktop.png`
+- Side-by-side evidence: `C:\Users\dhanush\OneDrive\Desktop\projects\ovi-design-academy\design-qa\choices-side-by-side.png`
+- Viewport: 1509 × 712 CSS px
+- Pixel dimensions: source crop 1509 × 712; implementation 1509 × 712
+- Density normalization: both captures at 1 CSS px to 1 image px
+- State: desktop choices section, default state
 
 ## Full-view comparison evidence
 
-Blocked. The source and all three generated transparent assets were opened and inspected, and the implementation was served successfully, but no browser-rendered screenshot could be captured for a normalized side-by-side comparison.
+The normalized side-by-side comparison confirms the requested composition: the mentor is centered between two choice cards, overlaps both cards, and visually connects the decision to the CTA below. Ovi's existing blue/orange palette, typography, copy, radii, and button treatment are intentionally retained instead of cloning the reference brand.
 
-## Focused region comparison evidence
+## Focused region comparison
 
-The separate assets were visually inspected after background removal. The direction sign has clean transparent corners and correctly preserves “Wireframe”, “Prototype”, “UI Design”, and “Success”. The moon has transparent upper corners and intentionally opaque lower corners where its surface reaches the frame edge. Header and footer markup compare exactly with the shared site source after removing the source page's `aria-current` marker. Browser-rendered hero composition remains blocked.
+The full comparison is already a focused crop of this single section, and all typography, card boundaries, portrait edges, CTA spacing, and overlap points are clearly readable. A second crop was not necessary.
+
+## Required fidelity surfaces
+
+- Fonts and typography: Ovi's League Spartan and DM Sans hierarchy remains consistent; heading and card copy wrap cleanly.
+- Spacing and layout rhythm: three-column desktop composition matches the reference structure; Rajkumar is centered and overlaps the cards without obscuring text. The CTA remains centered below.
+- Colors and visual tokens: existing Ovi deep blue, cyan-blue, white, and orange tokens are preserved as requested.
+- Image quality and asset fidelity: the supplied existing transparent Rajkumar portrait is sharp, centered, and displayed as a half-body figure without changing his face.
+- Copy and content: existing Ovi choice labels and benefits are preserved.
 
 ## Findings
 
-- [P1] Browser-rendered visual evidence is unavailable.
-  - Location: full `/404.html` route at desktop and mobile sizes.
-  - Evidence: the supported browser runtime reported no available browser surfaces.
-  - Impact: final asset overlap, crop, typography wrapping, parallax response, navigation interactions, footer spacing, and mobile stacking cannot be visually certified.
-  - Fix: open the missing route in an available browser, capture desktop and mobile states, test interactions, and compare them with the supplied reference.
-
-## Required fidelity surfaces
-
-- Fonts and typography: the page and shared chrome use the site's established Space Grotesk/Inter system; browser verification blocked.
-- Spacing and layout rhythm: desktop now uses the full hero as an unframed canvas, with left recovery copy, upper-right 404, and a full-width moon foreground. Mobile preserves the same open-canvas treatment and moves the illustration cluster below centered copy; browser verification blocked.
-- Colors and visual tokens: Ovi ink, sky blue, cobalt, coral, amber, white, and pale primary tokens are used consistently; browser verification blocked.
-- Image quality and asset fidelity: five dedicated layered raster elements replace the earlier single composite. The new sign follows the attached direction-board reference, and the moon foreground adds craters, rocks, crystals, and a portal in the matching 3D art direction.
-- Copy and content: the original user-flow message is preserved. The full site header/footer, course links, free-demo entry, newsletter form, social links, WhatsApp help, and recovery CTAs are present.
-
-## Primary interactions and runtime checks
-
-- Missing nested routes return HTTP 404 while serving the custom page.
-- All five generated assets return HTTP 200.
-- The shared header matches the existing source markup exactly after removing page-specific current-state markup.
-- The shared footer matches the existing source markup exactly.
-- Existing `script.js` passes Node syntax validation and powers the dropdown, mobile menu, demo form, footer year, and shared behavior.
-- The hero adds requestAnimationFrame-based pointer parallax, independent drift animations, hover/button states, and a reduced-motion fallback.
-- Browser-only click, focus, hover, animation, responsive, and console-error checks remain blocked.
+- No actionable P0, P1, or P2 issues remain.
+- P3: the reference uses pill headers above the cards, while the implementation keeps Ovi's established card-heading treatment. This is an intentional brand-system difference, not a fidelity blocker for the requested center-image composition.
 
 ## Comparison history
 
-- First version: one full-scene image with a simplified custom header/footer.
-- Current version: exact shared site chrome, five independently arranged image elements on a full-width frameless hero, a lower moon landscape, foreground astronaut and signboard, and both the recovery copy and main 404 sculpture lifted to match the latest placement references.
-- Static HTTP, alpha-channel, markup equality, target existence, and JavaScript syntax checks passed. Browser capture was unavailable, so no visual comparison iteration could be performed.
+1. Initial responsive pass found a mobile overlap between the portrait and the final line of the first card.
+2. Fixed by removing the negative mobile margin and matching the portrait and center-container heights at 245 px.
+3. Post-fix evidence confirms the first card ends before the portrait begins and the second card begins after the portrait ends, with no horizontal overflow.
+
+## Interaction and browser checks
+
+- Choices-section CTA opens the registration dialog.
+- Dialog closes through its close control.
+- Dialog width equals scroll width, so no horizontal crop is present.
+- Mobile viewport checked at 390 px; page and section have no horizontal overflow.
+- No application console errors were found. Browser-extension errors were excluded from application QA.
 
 ## Implementation checklist
 
-- Capture the missing route at 1440 × 900 and 390 × 844.
-- Test desktop parallax, mobile navigation, course dropdown, free-demo modal, newsletter form, and recovery links.
-- Confirm there are no browser console errors.
-- Fix any P0/P1/P2 visual differences and repeat the comparison.
-
-final result: blocked
-=======
-# Design QA - Responsive Hero
-
-- Source visual truth: existing Ovi desktop hero and the user's requirement for a clean mobile composition without text/image overlap.
-- Implementation: `hero-new/new-hero.html`.
-- Browser-rendered implementation: reviewed at the headless browser's 500 x 844 minimum mobile breakpoint before the temporary capture was removed from the production folder.
-- State: first carousel slide with mobile navigation closed.
-
-## Evidence
-
-The verified mobile view contains the shared topbar and header, visible hamburger control, balanced four-line headline, readable description, two full-width CTAs, three centered trust markers, a separate cropped illustration panel, and visible carousel controls. The artwork does not overlap the copy or controls.
-
-The second and third slides use smaller mobile headline sizing to accommodate their longer course names. All three hero assets share the same 1672 x 941 dimensions and use the same bounded mobile image treatment.
-
-## Required fidelity surfaces
-
-- Fonts and typography: Instrument Sans is preserved with responsive display sizing, balanced wrapping, and compact mobile body copy.
-- Spacing and layout rhythm: content and artwork occupy separate vertical zones; buttons, trust markers, and controls remain within the mobile frame.
-- Colors and visual tokens: existing Ovi orange, blue, pale background, and shared navigation styling are preserved.
-- Image quality and asset fidelity: original hero assets are retained with `object-fit: cover` and controlled mobile focal positioning.
-- Copy and content: hero copy, navigation, marquee, footer, CTAs, and carousel content remain intact.
-
-## Verification
-
-- `script.js` passes Node syntax validation.
-- Responsive breakpoints cover 720px, 560px, and 380px widths.
-- The complete 500 x 844 browser capture was visually inspected.
-- Temporary browser profiles and screenshot artifacts were removed from the production folder after verification.
+- [x] Center Rajkumar between both cards on desktop.
+- [x] Preserve the Ovi visual system.
+- [x] Keep portrait text-safe on mobile.
+- [x] Keep CTA interaction working.
+- [x] Verify responsive overflow and modal behavior.
 
 final result: passed
->>>>>>> theirs
-
-

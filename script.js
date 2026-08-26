@@ -2,6 +2,21 @@
 // script. This works both on the live domain and when pages are opened locally.
 const OVI_SITE_ROOT = new URL(".", document.currentScript?.src || document.baseURI);
 const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI_SITE_ROOT).href;
+const normalizeOviPath = (pathname) => {
+  const decoded = decodeURIComponent(pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
+  if (decoded === "/index.html") return "/";
+  if (decoded.endsWith("/index.html")) return decoded.slice(0, -"index.html".length);
+  if (decoded === "/" || decoded.endsWith(".html")) return decoded;
+  return decoded.endsWith("/") ? decoded : `${decoded}/`;
+};
+const OVI_SITE_BASE_PATH = normalizeOviPath(OVI_SITE_ROOT.pathname);
+const toOviSitePath = (pathname) => {
+  const normalized = normalizeOviPath(pathname);
+  if (OVI_SITE_BASE_PATH !== "/" && normalized.startsWith(OVI_SITE_BASE_PATH)) {
+    return normalized.slice(OVI_SITE_BASE_PATH.length - 1) || "/";
+  }
+  return normalized;
+};
 
 // ---------- Broken-page fallback ----------
 // Apache handles real 404 responses through .htaccess. This guard also covers
@@ -15,6 +30,7 @@ const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI
     "/courses/ui-ux-design-course-chennai/",
     "/courses/advanced-ui-ux-ai-leadership/",
     "/courses/compare-ui-ux-courses/",
+    "/unused/demo-class/",
     "/about/",
     "/student-work/",
     "/life-at-ovi/",
@@ -23,16 +39,8 @@ const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI
     "/404.html"
   ]);
 
-  const normalizePath = (pathname) => {
-    const decoded = decodeURIComponent(pathname || "/").toLowerCase().replace(/\/{2,}/g, "/");
-    if (decoded === "/index.html") return "/";
-    if (decoded.endsWith("/index.html")) return decoded.slice(0, -"index.html".length);
-    if (decoded === "/" || decoded.endsWith(".html")) return decoded;
-    return decoded.endsWith("/") ? decoded : `${decoded}/`;
-  };
-
   const isValidPage = (pathname) => {
-    const normalized = normalizePath(pathname);
+    const normalized = toOviSitePath(pathname);
     return validPaths.has(normalized) || normalized.startsWith("/blog/");
   };
   const isPageUrl = (pathname) => {
@@ -41,15 +49,15 @@ const oviSiteUrl = (path) => new URL(String(path || "").replace(/^\/+/, ""), OVI
   };
 
   const notFoundUrl = () => {
-    // Keep local file previews working, but use the domain root in production.
+    // Keep local file previews working, and respect hosted subfolders in production.
     if (window.location.protocol === "file:") {
       return new URL("404.html", document.baseURI).href;
     }
-    return new URL("/404.html", window.location.origin).href;
+    return new URL("404.html", OVI_SITE_ROOT).href;
   };
 
   const redirectTo404 = () => {
-    if (window.location.pathname.toLowerCase() !== "/404.html") {
+    if (toOviSitePath(window.location.pathname) !== "/404.html") {
       window.location.replace(notFoundUrl());
     }
   };
@@ -1037,7 +1045,7 @@ document.querySelectorAll(".news-form").forEach((form) => {
 // ---------- Reusable promotional banner popup ----------
 document.addEventListener("DOMContentLoaded", () => {
   const campaign = window.oviPromoBanner || PROMO_BANNER;
-  if (!campaign || !campaign.enabled || !campaign.image) {
+  if (document.body.classList.contains("demo-landing-page") || !campaign || !campaign.enabled || !campaign.image) {
     return;
   }
 
