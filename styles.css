@@ -5963,61 +5963,6 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   line-height:1.12;
 }
 
-.life-bento-card--video{
-  display:inline-grid;
-  place-items:center;
-  min-height:280px;
-  color:var(--cream);
-  background:
-    radial-gradient(circle at 22% 18%,rgba(255,164,93,.32),transparent 30%),
-    radial-gradient(circle at 78% 82%,rgba(26,166,242,.24),transparent 34%),
-    linear-gradient(150deg,#17162d 0%,#27234d 100%);
-}
-
-.life-bento-card--video.life-bento-card--tall{
-  min-height:420px;
-}
-
-.life-bento-card--video.life-bento-card--wide{
-  min-height:220px;
-}
-
-.life-video-placeholder{
-  display:grid;
-  place-items:center;
-  gap:.55rem;
-  padding:1.5rem;
-  text-align:center;
-}
-
-.life-play{
-  width:52px;
-  height:52px;
-  display:grid;
-  place-items:center;
-  border-radius:50%;
-  background:rgba(255,255,255,.1);
-  border:1px solid rgba(255,255,255,.16);
-  color:var(--lime);
-  box-shadow:0 18px 38px -26px rgba(0,0,0,.75);
-}
-
-.life-play svg{
-  width:21px;
-  height:21px;
-  margin-left:3px;
-}
-
-.life-video-placeholder strong{
-  font-family:"Space Grotesk",sans-serif;
-  font-size:1.02rem;
-}
-
-.life-video-placeholder small{
-  color:rgba(246,243,234,.64);
-  font-size:.78rem;
-}
-
 @media(max-width:1023px){
   .life-bento-grid{
     column-count:3;
@@ -6041,14 +5986,6 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   .life-bento-card{
     margin-bottom:.7rem;
     border-radius:.8rem;
-  }
-
-  .life-bento-card--video{
-    min-height:190px;
-  }
-
-  .life-bento-card--video.life-bento-card--tall{
-    min-height:260px;
   }
 
   .life-bento-caption{
