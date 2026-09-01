@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
+Disallow: /unused/
+Disallow: /Index.html
 
 Sitemap: https://ovidesign.in/sitemap.xml

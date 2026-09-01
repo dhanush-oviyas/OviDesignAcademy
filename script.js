@@ -18,83 +18,6 @@ const toOviSitePath = (pathname) => {
   return normalized;
 };
 
-// ---------- Broken-page fallback ----------
-// Apache handles real 404 responses through .htaccess. This guard also covers
-// static hosts that return index.html for an unknown URL, and bad local links.
-(() => {
-  const validPaths = new Set([
-    "/",
-    "/index.html",
-    "/index-1.html",
-    "/courses/",
-    "/courses/ui-ux-design-course-chennai/",
-    "/courses/advanced-ui-ux-ai-leadership/",
-    "/courses/compare-ui-ux-courses/",
-    "/unused/demo-class/",
-    "/about/",
-    "/student-work/",
-    "/life-at-ovi/",
-    "/faq/",
-    "/contact/",
-    "/404.html"
-  ]);
-
-  const isValidPage = (pathname) => {
-    const normalized = toOviSitePath(pathname);
-    return validPaths.has(normalized) || normalized.startsWith("/blog/");
-  };
-  const isPageUrl = (pathname) => {
-    const lastSegment = pathname.split("/").filter(Boolean).pop() || "";
-    return lastSegment.endsWith(".html") || !lastSegment.includes(".");
-  };
-
-  const notFoundUrl = () => {
-    // Keep local file previews working, and respect hosted subfolders in production.
-    if (window.location.protocol === "file:") {
-      return new URL("404.html", document.baseURI).href;
-    }
-    return new URL("404.html", OVI_SITE_ROOT).href;
-  };
-
-  const redirectTo404 = () => {
-    if (toOviSitePath(window.location.pathname) !== "/404.html") {
-      window.location.replace(notFoundUrl());
-    }
-  };
-
-  // Catch unknown URLs when a static host incorrectly serves index.html for them.
-  if (window.location.protocol !== "file:" && isPageUrl(window.location.pathname) && !isValidPage(window.location.pathname)) {
-    redirectTo404();
-    return;
-  }
-
-  // Catch broken same-site page links before the browser opens them.
-  document.addEventListener("click", (event) => {
-    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    if (window.location.protocol === "file:") return;
-
-    const link = event.target.closest("a[href]");
-    if (!link || link.hasAttribute("download") || (link.target && link.target !== "_self")) return;
-
-    const href = link.getAttribute("href").trim();
-    if (!href || href.startsWith("#") || /^(?:mailto:|tel:|sms:|javascript:)/i.test(href)) return;
-
-    let target;
-    try {
-      target = new URL(href, document.baseURI);
-    } catch (error) {
-      event.preventDefault();
-      redirectTo404();
-      return;
-    }
-
-    if (target.origin !== window.location.origin || !isPageUrl(target.pathname) || isValidPage(target.pathname)) return;
-
-    event.preventDefault();
-    redirectTo404();
-  });
-})();
-
 // ---------- Data ----------
 const prefersReducedMotion = typeof window.matchMedia === "function"
   ? window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -1660,9 +1583,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const getCourseHref = (course) => {
       const key = `${course.tag || ""} ${course.h || ""}`.toLowerCase();
       if (course.url) return course.url;
-      if (key.includes("advanced")) return "/courses/advanced-ui-ux-ai-leadership/";
-      if (key.includes("ux")) return "/courses/ui-ux-design-course-chennai/";
-      return "/courses/compare-ui-ux-courses/";
+      if (key.includes("advanced")) return "/courses/advanced-ui-ux-ai-design-course-chennai/advanced-ui-ux-ai-course-chennai.html";
+      if (key.includes("ux")) return "/courses/ux-ui-ai-vibe-design-course-chennai/ux-ui-ai-vibe-design-program-chennai.html";
+      return "/courses/ui-ux-design-course-fees-chennai/ui-ux-design-course-fees-comparison.html";
     };
     el.innerHTML = courseCrossSell.map((course) => `
       <a href="${oviSiteUrl(getCourseHref(course))}" class="rel-card rel-${course.cls}">
