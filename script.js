@@ -1914,7 +1914,9 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   const startAutoplay = () => {
     stopAutoplay();
-    if (!reducedMotion.matches) timer = window.setInterval(() => render(current + 1), 5000);
+    if (!reducedMotion.matches && !document.hidden) {
+      timer = window.setInterval(() => render(current + 1), 5000);
+    }
   };
   const select = (index) => {
     render(index);
@@ -1924,8 +1926,6 @@ document.addEventListener("DOMContentLoaded", () => {
   dots.forEach((dot) => dot.addEventListener("click", () => select(Number(dot.dataset.indexSlide))));
   previous.addEventListener("click", () => select(current - 1));
   next.addEventListener("click", () => select(current + 1));
-  hero.addEventListener("mouseenter", stopAutoplay);
-  hero.addEventListener("mouseleave", startAutoplay);
   hero.addEventListener("mousemove", (event) => {
     if (reducedMotion.matches) return;
     const bounds = hero.getBoundingClientRect();
@@ -1935,10 +1935,6 @@ document.addEventListener("DOMContentLoaded", () => {
     scheduleParallax();
   });
   hero.addEventListener("mouseleave", resetParallax);
-  hero.addEventListener("focusin", stopAutoplay);
-  hero.addEventListener("focusout", (event) => {
-    if (!hero.contains(event.relatedTarget)) startAutoplay();
-  });
   hero.addEventListener("touchstart", (event) => {
     touchStartX = event.changedTouches[0].clientX;
   }, { passive: true });
@@ -1955,6 +1951,13 @@ document.addEventListener("DOMContentLoaded", () => {
   reducedMotion.addEventListener("change", () => {
     resetParallax();
     startAutoplay();
+  });
+  document.addEventListener("visibilitychange", () => {
+    if (document.hidden) stopAutoplay();
+    else startAutoplay();
+  });
+  window.addEventListener("pageshow", (event) => {
+    if (event.persisted) startAutoplay();
   });
 
   render(0);

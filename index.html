@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <script>
@@ -158,9 +158,10 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css" />
 <link rel="preload" as="image" href="image/hero-section/IMG_0207.webp" fetchpriority="high" />
-<link rel="stylesheet" href="styles.css?v=10" />
+<link rel="stylesheet" href="styles.css?v=20" />
 </head>
 <body>
+<script src="preloader.js?v=5"></script>
 <div id="scroll-progress" class="scroll-progress"></div>
 
 <div data-ovi-header></div>
@@ -365,7 +366,7 @@
     <div class="section-head">
       <div>
         <div class="eyebrow"> Why Ovi</div>
-        <h2 class="h-display" style="margin-top:.75rem;max-width:42rem">What makes Ovi one of the <span class="text-violet">best UX UI academies in Chennai.</span></h2>
+        <h2 class="h-display" style="margin-top:.75rem;">What makes Ovi one of the <span class="text-violet">best UX UI academies in Chennai.</span></h2>
       </div>
     </div>
     <div class="feature-grid" id="features">
@@ -517,13 +518,13 @@
 </section>
 
 <!-- WHY UX/UI -->
-<section class="placed" style="padding:6rem 0">
+<section class="why-careers" id="why-ux-ui" aria-labelledby="why-careers-title">
   <div class="container-x">
     <div class="why-top">
       <div class="why-intro">
         <div class="eyebrow"> Why UX/UI?</div>
-        <h2 class="h-display-sm" style="margin-top:.75rem">One of the fastest growing careers of this decade.</h2>
-        <p class="text-muted" style="margin-top:1rem;font-size:1.125rem">Build products. Solve problems. Shape experiences.</p>
+        <h2 id="why-careers-title">One of the fastest growing <span>careers of this decade.</span></h2>
+        <p class="why-careers__lead">Build products. Solve problems. Shape experiences.</p>
         <div class="rank-card">
           <div class="rank-num">#6</div>
           <div>
@@ -546,10 +547,12 @@
           </div>
         </div>
         <div class="phone-glow"></div>
+        <div class="phone-note phone-note--top">Student projects <span>IN ACTION</span></div>
+        <div class="phone-note phone-note--bottom"><span class="phone-note__dot"></span> Designed at Ovi</div>
       </div>
     </div>
 
-  <div class="grid">
+  <div class="grid why-careers__grid">
 
     <div class="card card--wide card--violet">
       <div class="card-top">
@@ -623,7 +626,7 @@
         <span class="spec">05 · IMPACT</span>
       </div>
       <h3>Work people actually feel</h3>
-      <p>Good design changes how people get through their day clearer forms, calmer apps, fewer moments of friction.</p>
+      <p>Good design changes how people get through their day: clearer forms, calmer apps, fewer moments of friction.</p>
     </div>
 
     <div class="card card--pink">
@@ -1417,6 +1420,6 @@ cf && cf.addEventListener("submit", (e) => {
   setTimeout(() => { document.getElementById("form-success").hidden = true; }, 5000);
 });
 </script>
-<script src="script.js?v=15" defer></script>
+<script src="script.js?v=16" defer></script>
 </body>
 </html>
