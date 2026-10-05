@@ -21,7 +21,8 @@ const toOviSitePath = (pathname) => {
 // Single source of truth for the reusable site header and footer components.
 const OVI_SHARED_NAV_LINKS = Object.freeze({
   "Courses": "/ui-ux-courses-chennai/best-ui-ux-courses-in-chennai.html",
-  "UX UI + Ai Vibe Design": "/courses/ux-ui-ai-vibe-design-course-chennai/ux-ui-ai-vibe-design-program-chennai.html",
+  "What is a Design Engineer?": "/design-engineer/",
+  "UX UI + Ai Vibe Design (Design Engineer)": "/courses/ux-ui-ai-vibe-design-course-chennai/ux-ui-ai-vibe-design-program-chennai.html",
   "Advanced UX/UI + AI Leadership Program": "/courses/advanced-ui-ux-ai-design-course-chennai/advanced-ui-ux-ai-course-chennai.html",
   "Compare the Courses": "/courses/ui-ux-design-course-fees-chennai/ui-ux-design-course-fees-comparison.html",
   "About Us": "/about-ovi-design-academy-mentor-chennai/ui-ux-design-mentor-chennai.html",
@@ -85,7 +86,7 @@ function renderSharedHeader() {
           <div class="nav-dropdown">
             <a href="${sharedSiteHref("Courses")}" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false"${coursesActive ? ' aria-current="page"' : ""}>Courses <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
             <div class="nav-dropdown-menu" role="menu" aria-label="Courses">
-              <a href="${sharedSiteHref("UX UI + Ai Vibe Design")}" role="menuitem"${sharedCurrentAttribute("UX UI + Ai Vibe Design")}>UX UI + Ai Vibe Design</a>
+              <a href="${sharedSiteHref("UX UI + Ai Vibe Design (Design Engineer)")}" role="menuitem"${sharedCurrentAttribute("UX UI + Ai Vibe Design (Design Engineer)")}>UX UI + Ai Vibe Design (Design Engineer)</a>
               <a href="${sharedSiteHref("Advanced UX/UI + AI Leadership Program")}" role="menuitem"${sharedCurrentAttribute("Advanced UX/UI + AI Leadership Program")}>Advanced UX/UI + AI Leadership Program</a>
               <a href="${sharedSiteHref("Compare the Courses")}" role="menuitem" class="nav-dropdown-all"${sharedCurrentAttribute("Compare the Courses")}>Compare the Courses</a>
             </div>
@@ -104,7 +105,7 @@ function renderSharedHeader() {
       </div>
       <div id="mobile-menu" class="mobile-menu"><div class="container-x">
         <div class="mobile-menu-group"><span class="mobile-menu-label">Courses</span>
-          <a href="${sharedSiteHref("UX UI + Ai Vibe Design")}"${sharedCurrentAttribute("UX UI + Ai Vibe Design")}>UX UI + Ai Vibe Design</a>
+          <a href="${sharedSiteHref("UX UI + Ai Vibe Design (Design Engineer)")}"${sharedCurrentAttribute("UX UI + Ai Vibe Design (Design Engineer)")}>UX UI + Ai Vibe Design (Design Engineer)</a>
           <a href="${sharedSiteHref("Advanced UX/UI + AI Leadership Program")}"${sharedCurrentAttribute("Advanced UX/UI + AI Leadership Program")}>Advanced UX/UI + AI Leadership Program</a>
           <a href="${sharedSiteHref("Compare the Courses")}" class="mobile-menu-all"${sharedCurrentAttribute("Compare the Courses")}>Compare the Courses</a>
         </div>
@@ -122,6 +123,7 @@ function renderSharedFooter() {
   mount.innerHTML = `
     <footer class="footer-v2">
       <div class="footer-aurora"></div>
+      <div class="footer-spot" aria-hidden="true"></div>
       <div class="container-x">
         <div class="footer-top">
           <div class="footer-cta"><div class="eyebrow" style="color:rgba(246,243,234,.6)">Stay in the loop</div><h3>Design tips, batch dates &amp; <span class="i">student wins</span> — straight to your inbox.</h3></div>
@@ -136,22 +138,22 @@ function renderSharedFooter() {
             <p>Transforming beginners into industry-ready UX/UI designers. Startup India recognised · Figma Authorised Training Partner.</p>
             <div class="badges"><span class="bg-pill">Startup India</span><span class="bg-pill">Figma Partner</span><span class="bg-pill">ISO Certified</span></div>
             <div class="socials">
-              <a href="https://www.instagram.com/ovi_design_academy/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
-              <a href="https://www.youtube.com/channel/UCrfoVU5GsI8SAShqH46fBFQ" aria-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
-              <a href="https://in.linkedin.com/company/ovi-design-academy" aria-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-              <a href="https://wa.me/919444074941" aria-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
+              <a href="https://www.instagram.com/ovi_design_academy/?hl=en" aria-label="Instagram" data-label="Instagram" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+              <a href="https://www.youtube.com/channel/UCrfoVU5GsI8SAShqH46fBFQ" aria-label="YouTube" data-label="YouTube" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"/><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"/></svg></a>
+              <a href="https://in.linkedin.com/company/ovi-design-academy" aria-label="LinkedIn" data-label="LinkedIn" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+              <a href="https://wa.me/919444074941" aria-label="WhatsApp" data-label="WhatsApp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg></a>
             </div>
           </div>
-          <div><h4>Learn</h4><ul><li><a href="${sharedSiteHref("UX UI + Ai Vibe Design")}">UX UI + Ai Vibe Design</a></li><li><a href="${sharedSiteHref("Advanced UX/UI + AI Leadership Program")}">Advanced UX/UI + AI Leadership Program</a></li><li><a href="${sharedSiteHref("All Courses")}">All Courses</a></li><li><a href="${sharedSiteHref("Compare the Courses")}">Compare the Courses</a></li><li><a href="${sharedSiteHref("Free Demo")}">Free Demo</a></li></ul></div>
-          <div><h4>Discover</h4><ul><li><a href="${sharedSiteHref("Student Works")}">Student Works</a></li><li><a href="${sharedSiteHref("FAQ")}">FAQ</a></li><li><a href="${sharedSiteHref("Blog")}"${sharedBlogAttributes}>Blog</a></li><li><a href="${sharedSiteHref("Life at Ovi")}">Life at Ovi</a></li><li><a href="${sharedSiteHref("Contact")}">Contact</a></li></ul></div>
+          <div><h4>Learn</h4><ul><li><a href="${sharedSiteHref("UX UI + Ai Vibe Design (Design Engineer)")}">UX UI + Ai Vibe Design (Design Engineer)</a></li><li><a href="${sharedSiteHref("Advanced UX/UI + AI Leadership Program")}">Advanced UX/UI + AI Leadership Program</a></li><li><a href="${sharedSiteHref("All Courses")}">All Courses</a></li><li><a href="${sharedSiteHref("Compare the Courses")}">Compare the Courses</a></li><li><a href="${sharedSiteHref("Free Demo")}">Free Demo</a></li></ul></div>
+          <div><h4>Discover</h4><ul><li><a href="${sharedSiteHref("What is a Design Engineer?")}">What is a Design Engineer?</a></li><li><a href="${sharedSiteHref("Student Works")}">Student Works</a></li><li><a href="${sharedSiteHref("FAQ")}">FAQ</a></li><li><a href="${sharedSiteHref("Blog")}"${sharedBlogAttributes}>Blog</a></li><li><a href="${sharedSiteHref("Life at Ovi")}">Life at Ovi</a></li><li><a href="${sharedSiteHref("Contact")}">Contact</a></li></ul></div>
           <div><h4>Reach us</h4><ul>
-            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> +91 98400 25161</li>
-            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> info@ovidesign.in</li>
-            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> 200 Feet, GST Road, Thillai Nagar, (Senthil Nagar), Kolathur, Chennai. 600099</li>
+            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> <a href="tel:+919840025161">+91 98400 25161</a><button type="button" class="footer-copy" data-copy="+91 98400 25161" aria-label="Copy phone number"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> <a href="mailto:info@ovidesign.in">info@ovidesign.in</a><button type="button" class="footer-copy" data-copy="info@ovidesign.in" aria-label="Copy email address"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></button></li>
+            <li class="ci"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> <a href="https://www.google.com/maps/search/?api=1&amp;query=Ovi+Design+Academy+Kolathur+Chennai" target="_blank" rel="noopener">200 Feet, GST Road, Thillai Nagar, (Senthil Nagar), Kolathur, Chennai. 600099</a></li>
           </ul></div>
         </div>
-        <div class="footer-mega" aria-hidden="true">OVI Design<span>.</span></div>
-        <div class="footer-bottom"><div>© <span id="yr">${new Date().getFullYear()}</span> Ovi Design Academy · Made with Love - <a href="https://oviyas.com" target="_blank" rel="noopener">Oviyas</a></div><div class="lks"><a href="${sharedSiteHref("Contact")}">Contact</a><a href="${sharedSiteHref("Course FAQ")}">Course FAQ</a><a href="${sharedSiteHref("Sitemap")}">Sitemap</a></div></div>
+        <div class="footer-mega" aria-hidden="true"><span class="fm-ch">O</span><span class="fm-ch">V</span><span class="fm-ch">I</span><span class="fm-ch fm-sp">&nbsp;</span><span class="fm-ch">D</span><span class="fm-ch">e</span><span class="fm-ch">s</span><span class="fm-ch">i</span><span class="fm-ch">g</span><span class="fm-ch">n</span><span class="fm-ch fm-dot">.</span></div>
+        <div class="footer-bottom"><div>© <span id="yr">${new Date().getFullYear()}</span> Ovi Design Academy · Made with Love - <a href="https://oviyas.com" target="_blank" rel="noopener">Oviyas</a></div><div class="footer-clock"><span class="footer-clock__dot" aria-hidden="true"></span>Kolathur, Chennai · <time data-footer-clock>--:--</time> IST</div><div class="lks"><a href="${sharedSiteHref("Contact")}">Contact</a><a href="${sharedSiteHref("Course FAQ")}">Course FAQ</a><a href="${sharedSiteHref("Sitemap")}">Sitemap</a><button type="button" class="footer-top-btn" data-footer-top aria-label="Back to top"><svg class="footer-top-btn__ring" viewBox="0 0 36 36" aria-hidden="true"><circle cx="18" cy="18" r="16"/><circle class="footer-top-btn__progress" cx="18" cy="18" r="16" pathLength="100"/></svg><svg class="footer-top-btn__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button></div></div>
       </div>
     </footer>`;
 
@@ -160,7 +162,187 @@ function renderSharedFooter() {
 
 renderSharedHeader();
 renderSharedFooter();
+initFooterInteractions();
 syncSharedNavigation();
+
+// Footer interactions: cursor spotlight, rising wordmark, magnetic socials, copy, clock, back to top.
+function initFooterInteractions() {
+  const footer = document.querySelector(".footer-v2");
+  if (!footer) return;
+
+  const finePointer = window.matchMedia("(hover:hover) and (pointer:fine)").matches;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const chars = Array.from(footer.querySelectorAll(".footer-mega .fm-ch"));
+  const socials = Array.from(footer.querySelectorAll(".socials a"));
+  let frame = null;
+  let pointer = null;
+
+  const draw = () => {
+    frame = null;
+    if (!pointer) return;
+    const box = footer.getBoundingClientRect();
+    footer.style.setProperty("--fx", `${pointer.x - box.left}px`);
+    footer.style.setProperty("--fy", `${pointer.y - box.top}px`);
+    chars.forEach((ch) => {
+      const r = ch.getBoundingClientRect();
+      const dx = (pointer.x - (r.left + r.width / 2)) / 260;
+      const dy = (pointer.y - (r.top + r.height / 2)) / 520;
+      const lift = Math.max(0, 1 - Math.sqrt(dx * dx + dy * dy));
+      ch.style.setProperty("--lift", lift.toFixed(3));
+    });
+    socials.forEach((a) => {
+      const r = a.getBoundingClientRect();
+      const dx = pointer.x - (r.left + r.width / 2);
+      const dy = pointer.y - (r.top + r.height / 2);
+      const near = Math.hypot(dx, dy) < 70;
+      a.style.transform = near ? `translate(${dx * 0.3}px, ${dy * 0.3}px)` : "";
+    });
+  };
+
+  if (finePointer && !reduceMotion) {
+    footer.classList.add("footer-fx");
+    footer.addEventListener("pointermove", (event) => {
+      pointer = { x: event.clientX, y: event.clientY };
+      if (frame === null) frame = requestAnimationFrame(draw);
+    });
+    footer.addEventListener("pointerleave", () => {
+      pointer = null;
+      chars.forEach((ch) => ch.style.setProperty("--lift", "0"));
+      socials.forEach((a) => (a.style.transform = ""));
+    });
+    initDraggableWordmark(chars.filter((ch) => !ch.classList.contains("fm-sp")));
+  }
+
+  footer.querySelectorAll("[data-copy]").forEach((button) => {
+    button.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(button.dataset.copy);
+        button.classList.add("is-copied");
+        button.setAttribute("data-tip", "Copied!");
+      } catch {
+        button.setAttribute("data-tip", "Copy failed");
+      }
+      setTimeout(() => {
+        button.classList.remove("is-copied");
+        button.removeAttribute("data-tip");
+      }, 1600);
+    });
+  });
+
+  const clock = footer.querySelector("[data-footer-clock]");
+  if (clock) {
+    const format = new Intl.DateTimeFormat("en-IN", { hour: "2-digit", minute: "2-digit", hour12: true, timeZone: "Asia/Kolkata" });
+    const tick = () => (clock.textContent = format.format(new Date()).toUpperCase());
+    tick();
+    setInterval(tick, 30000);
+  }
+
+  const topButton = footer.querySelector("[data-footer-top]");
+  if (topButton) {
+    const progress = topButton.querySelector(".footer-top-btn__progress");
+    let scrollFrame = null;
+    const update = () => {
+      scrollFrame = null;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.strokeDashoffset = String(100 - (max > 0 ? (window.scrollY / max) * 100 : 0));
+    };
+    window.addEventListener("scroll", () => {
+      if (scrollFrame === null) scrollFrame = requestAnimationFrame(update);
+    }, { passive: true });
+    update();
+    topButton.addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" }));
+  }
+
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    footer.classList.add("footer-stagger");
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        footer.classList.add("footer-in");
+        observer.disconnect();
+      }
+    }, { threshold: 0.12 });
+    observer.observe(footer.querySelector(".footer-cols") || footer);
+  }
+}
+
+// Wordmark letters can be grabbed and flung; a spring pulls them back home.
+function initDraggableWordmark(letters) {
+  const bodies = new Map();
+  let loop = null;
+
+  const apply = (ch, body) => {
+    ch.style.setProperty("--dx", `${body.x.toFixed(1)}px`);
+    ch.style.setProperty("--dy", `${body.y.toFixed(1)}px`);
+    ch.style.setProperty("--rot", `${body.rot.toFixed(2)}deg`);
+  };
+
+  const step = () => {
+    loop = null;
+    let moving = false;
+    bodies.forEach((body, ch) => {
+      if (body.dragging) {
+        moving = true;
+        return;
+      }
+      body.vx = (body.vx - body.x * 0.09) * 0.84;
+      body.vy = (body.vy - body.y * 0.09) * 0.84;
+      body.x += body.vx;
+      body.y += body.vy;
+      body.rot = Math.max(-25, Math.min(25, body.vx * 0.9));
+      if (Math.abs(body.x) + Math.abs(body.y) + Math.abs(body.vx) + Math.abs(body.vy) < 0.2) {
+        body.x = body.y = body.vx = body.vy = body.rot = 0;
+        apply(ch, body);
+        ch.classList.remove("is-dragging", "is-flung");
+        bodies.delete(ch);
+        return;
+      }
+      apply(ch, body);
+      moving = true;
+    });
+    if (moving) loop = requestAnimationFrame(step);
+  };
+
+  const run = () => {
+    if (loop === null) loop = requestAnimationFrame(step);
+  };
+
+  letters.forEach((ch) => {
+    ch.addEventListener("pointerdown", (event) => {
+      event.preventDefault();
+      try { ch.setPointerCapture(event.pointerId); } catch {}
+      const body = bodies.get(ch) || { x: 0, y: 0, vx: 0, vy: 0, rot: 0 };
+      Object.assign(body, { dragging: true, startX: event.clientX - body.x, startY: event.clientY - body.y, lastX: event.clientX, lastY: event.clientY });
+      bodies.set(ch, body);
+      ch.classList.add("is-dragging");
+      ch.classList.remove("is-flung");
+      run();
+    });
+    ch.addEventListener("pointermove", (event) => {
+      const body = bodies.get(ch);
+      if (!body || !body.dragging) return;
+      body.vx = event.clientX - body.lastX;
+      body.vy = event.clientY - body.lastY;
+      body.lastX = event.clientX;
+      body.lastY = event.clientY;
+      body.x = event.clientX - body.startX;
+      body.y = event.clientY - body.startY;
+      body.rot = Math.max(-25, Math.min(25, body.vx * 1.2));
+      apply(ch, body);
+    });
+    const release = () => {
+      const body = bodies.get(ch);
+      if (!body || !body.dragging) return;
+      body.dragging = false;
+      body.vx *= 1.6;
+      body.vy *= 1.6;
+      ch.classList.remove("is-dragging");
+      ch.classList.add("is-flung");
+      run();
+    };
+    ch.addEventListener("pointerup", release);
+    ch.addEventListener("pointercancel", release);
+  });
+}
 
 // ---------- Data ----------
 const prefersReducedMotion = typeof window.matchMedia === "function"
@@ -513,14 +695,14 @@ const PROMO_BANNER = {
   image: "/image/ux-ui-masterclass-visual-poster.jpg",
   imageAlt: "Students learning UX UI design on a laptop interface.",
   eyebrow: "Limited-time offer",
-  title: "Next UX UI + Ai Vibe Design batch starts soon",
+  title: "Next UX UI + Ai Vibe Design (Design Engineer) batch starts soon",
   body: `Attend a free demo class before the offer closes and save ${EARLY_BIRD_DISCOUNT} on your enrollment. Seats are limited for the next batch.`,
   deadline: toISTDeadline(NEXT_BATCH_CYCLE.earlyBirdDate),
   deadlineLabel: `Offer closes ${EARLY_BIRD_DAY_MONTH}`,
   seatsLabel: "Limited seats available",
   formCtaLabel: "Open enquiry form",
   whatsappCtaLabel: "Chat on WhatsApp",
-  whatsappUrl: "https://wa.me/919444074941?text=Hi%20Ovi%20Design%20Academy%2C%20I%20want%20to%20attend%20the%20free%20demo%20class%20for%20the%20next%20UX%2FUI%20design%20batch.",
+  whatsappUrl: "https://wa.me/919444074941?text=" + encodeURIComponent("Hi Ovi Design Academy, I want to attend the free demo class for the next UX UI + Ai Vibe Design (Design Engineer) batch."),
   showDelay: 6000
 };
 
@@ -1331,7 +1513,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <label class="sr-only" for="preferred-course">Preferred course</label>
                     <select id="preferred-course" name="entry.376165871" aria-label="Preferred course" autocomplete="off" required>
                       <option value="">Preferred course</option>
-                      <option>UX UI + Ai Vibe Design</option>
+                      <option>UX UI + Ai Vibe Design (Design Engineer)</option>
                       <option>Advanced UX/UI + AI Leadership Program</option>
                     </select>
                   </div>
@@ -1796,35 +1978,47 @@ document.addEventListener("DOMContentLoaded", () => {
   const hero = document.querySelector("[data-index-hero]");
   if (!hero) return;
 
+  const programUrl = "/courses/ux-ui-ai-vibe-design-course-chennai/ux-ui-ai-vibe-design-program-chennai.html";
   const slides = [
     {
-      titleOne: "Upscale your career",
-      titleTwo: "Graphic to UX + Ai",
-      description: "Learn UX/UI Design, AI-powered workflows and Vibe Coding to turn your ideas into functional mobile and web applications."
+      titleOne: "UI UX Design Course in Chennai",
+      titleTwo: "AI-Powered Design Engineer",
+      description: "Learn UX/UI, Figma, AI tools and Vibe Coding to go from user problem to prototype to working product — with live projects, portfolio development and mentor-led training.",
+      trust: ["25+ Years Design Experience", "Figma Training", "Live Projects", "Portfolio Building", "Placement Support"],
+      primary: "Book a Free Demo",
+      secondary: "Explore UX/UI + AI",
+      secondaryHref: programUrl,
+      micro: "3-Month Program · Online & Offline · Tamil & English · No Coding Experience Required"
     },
     {
-      titleOne: "AI-Powered UX/UI &",
-      titleTwo: "Vibe Prototyping",
-      description: "Join Chennai's industry-focused UX/UI program and learn AI, Figma, research, prototyping, and design systems."
+      titleOne: "From Problem to Product",
+      titleTwo: "UX/UI + AI + Vibe Coding",
+      description: "Build the skills to research, design, prototype and build digital products using Figma and AI-powered tools — and create a portfolio that showcases what you can actually do.",
+      trust: ["Learn UX/UI", "Master Figma", "Use AI", "Build Projects", "Create Your Portfolio"],
+      primary: "Start with a Free Demo",
+      secondary: "Explore the Design Engineer Program",
+      secondaryHref: programUrl,
+      micro: "UI UX Design Course in Chennai · 3 Months · Online + Offline"
     },
     {
-      titleOne: "Don't Just Design,",
-      titleTwo: "Build them with AI.",
-      description: "Learn UX/UI Design, AI Tools and Vibe Coding to turn your ideas into functional mobile and web apps without traditional coding.",
-      primaryText: "Book Free Demo Class",
-      secondaryText: "Talk to Mentor",
-      secondaryHref: "https://wa.me/919444074941?text=Hi%20Ovi%20Design%20Academy%2C%20I%27d%20like%20to%20talk%20to%20a%20mentor%20about%20the%20AI-Powered%20UX%2FUI%20%2B%20Vibe%20Coding%20course.",
-      secondaryExternal: true
+      titleOne: "Your Career in UX/UI + AI",
+      titleTwo: "Be a Design Engineer",
+      description: "Learn UX/UI Design, Figma, AI-powered workflows and Vibe Coding through real projects and hands-on mentoring — and build a portfolio ready for the modern product design industry.",
+      trust: ["25+ Years Experienced Mentor", "500+ Students", "Live Projects", "Portfolio Support"],
+      primary: "Book Your Free Demo",
+      secondary: "See What You’ll Learn",
+      secondaryHref: `${programUrl}#curriculum`,
+      micro: "UI UX Design Course in Chennai · Online & Offline · Tamil & English · Beginners Welcome"
     }
   ];
 
   const titleOne = hero.querySelector("[data-index-title-one]");
   const titleTwo = hero.querySelector("[data-index-title-two]");
   const description = hero.querySelector("[data-index-description]");
-  const primaryText = hero.querySelector("[data-index-primary-text]");
+  const trust = hero.querySelector("[data-index-trust]");
+  const primary = hero.querySelector("[data-index-primary]");
   const secondary = hero.querySelector("[data-index-secondary]");
-  const secondaryText = hero.querySelector("[data-index-secondary-text]");
-  const secondaryIcon = hero.querySelector("[data-index-secondary-icon]");
+  const micro = hero.querySelector("[data-index-micro]");
   const dots = Array.from(hero.querySelectorAll("[data-index-slide]"));
   const backgrounds = Array.from(hero.querySelectorAll("[data-index-background]"));
   const previous = hero.querySelector("[data-index-prev]");
@@ -1870,23 +2064,19 @@ document.addEventListener("DOMContentLoaded", () => {
     titleOne.textContent = slide.titleOne;
     titleTwo.textContent = slide.titleTwo;
     description.textContent = slide.description;
-    primaryText.textContent = slide.primaryText || "Start Your Free Demo";
-    secondaryText.textContent = slide.secondaryText || "Explore Courses";
-    secondary.href = slide.secondaryHref || oviSiteUrl("courses/index.html");
-
-    if (slide.secondaryExternal) {
-      secondary.target = "_blank";
-      secondary.rel = "noopener";
-      secondaryIcon.setAttribute("fill", "none");
-      secondaryIcon.setAttribute("stroke", "currentColor");
-      secondaryIcon.innerHTML = '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>';
-    } else {
-      secondary.removeAttribute("target");
-      secondary.removeAttribute("rel");
-      secondaryIcon.setAttribute("fill", "currentColor");
-      secondaryIcon.setAttribute("stroke", "none");
-      secondaryIcon.innerHTML = '<polygon points="5 3 19 12 5 21 5 3"></polygon>';
-    }
+    trust.replaceChildren(...slide.trust.flatMap((item, itemIndex) => {
+      const label = document.createElement("span");
+      label.textContent = item;
+      if (itemIndex === 0) return [label];
+      const divider = document.createElement("span");
+      divider.className = "d";
+      divider.textContent = "|";
+      return [divider, label];
+    }));
+    primary.textContent = slide.primary;
+    secondary.textContent = slide.secondary;
+    secondary.href = slide.secondaryHref;
+    micro.textContent = slide.micro;
 
     backgrounds.forEach((background, itemIndex) => background.classList.toggle("is-active", itemIndex === current));
     dots.forEach((dot, itemIndex) => {
