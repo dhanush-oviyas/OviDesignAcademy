@@ -1,2 +1,5 @@
 # ShipStudio metadata
 .shipstudio/
+
+# Deployment archives
+*.zip
