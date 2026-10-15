@@ -691,14 +691,14 @@ document.addEventListener("DOMContentLoaded", sortStudentWorkByBatch);
 
 const PROMO_BANNER = {
   enabled: true,
-  id: "next-batch-demo-offer-2026",
-  image: "/image/ux-ui-masterclass-visual-poster.jpg",
-  imageAlt: "Students learning UX UI design on a laptop interface.",
-  eyebrow: "Limited-time offer",
+  id: "vijayadasami-offer-2026",
+  image: "/image/vijayadasami-offer-poster.jpg",
+  imageAlt: "Ovi Design Academy Vijayadasami offer poster: admissions and demo classes are open for the Design Engineer course.",
+  eyebrow: "Vijayadasami Offer",
   title: "Next UX UI + Ai Vibe Design (Design Engineer) batch starts soon",
   body: `Attend a free demo class before the offer closes and save ${EARLY_BIRD_DISCOUNT} on your enrollment. Seats are limited for the next batch.`,
-  deadline: toISTDeadline(NEXT_BATCH_CYCLE.earlyBirdDate),
-  deadlineLabel: `Offer closes ${EARLY_BIRD_DAY_MONTH}`,
+  deadline: "2026-10-20T23:59:59+05:30",
+  deadlineLabel: "New batch starts 20 Oct",
   seatsLabel: "Limited seats available",
   formCtaLabel: "Open enquiry form",
   whatsappCtaLabel: "Chat on WhatsApp",
@@ -2073,7 +2073,7 @@ document.addEventListener("DOMContentLoaded", () => {
       divider.textContent = "|";
       return [divider, label];
     }));
-    primary.textContent = slide.primary;
+    if (primary) primary.textContent = slide.primary;
     secondary.textContent = slide.secondary;
     secondary.href = slide.secondaryHref;
     micro.textContent = slide.micro;
