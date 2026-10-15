@@ -26,7 +26,7 @@ const OVI_SHARED_NAV_LINKS = Object.freeze({
   "Advanced UX/UI + AI Leadership Program": "/courses/advanced-ui-ux-ai-design-course-chennai/advanced-ui-ux-ai-course-chennai.html",
   "Compare the Courses": "/courses/ui-ux-design-course-fees-chennai/ui-ux-design-course-fees-comparison.html",
   "About Us": "/about-ovi-design-academy-mentor-chennai/ui-ux-design-mentor-chennai.html",
-  "Student Works": "/ui-ui-design-student-portfolio/ui-ux-designer-portfolio-chennai.html",
+  "Student Works": "/ui-ux-design-student-portfolio/ui-ux-designer-portfolio-chennai.html",
   "Life at Ovi": "/life-at-ovi-design-academy-chennai/ui-ux-design-classes-chennai.html",
   "FAQ": "/faq-ui-ux-design-course-chennai/ui-ux-course-fees-placement-faq.html",
   "Blog": "https://blog.ovidesign.in/",
@@ -81,7 +81,7 @@ function renderSharedHeader() {
     </div>
     <header class="nav">
       <div class="container-x nav-inner">
-        <a href="${oviSiteUrl("/")}" class="logo"${sharedCurrentPath === "/" ? ' aria-current="page"' : ""}><img src="${oviSiteUrl("image/Logo.png")}" alt="Ovi Design Academy" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="logo-fallback"><span class="logo-mark">O</span>ovi<span class="text-violet">.</span></span></a>
+        <a href="${oviSiteUrl("/")}" class="logo"${sharedCurrentPath === "/" ? ' aria-current="page"' : ""}><img src="${oviSiteUrl("image/brand/logo.webp")}" alt="Ovi Design Academy" class="logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="logo-fallback"><span class="logo-mark">O</span>ovi<span class="text-violet">.</span></span></a>
         <nav class="nav-links" aria-label="Primary navigation">
           <div class="nav-dropdown">
             <a href="${sharedSiteHref("Courses")}" class="nav-dropdown-toggle" aria-haspopup="true" aria-expanded="false"${coursesActive ? ' aria-current="page"' : ""}>Courses <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></a>
@@ -134,7 +134,7 @@ function renderSharedFooter() {
         </div>
         <div class="footer-cols">
           <div class="footer-brand">
-            <div class="footer-logo"><img src="${oviSiteUrl("image/Logo.png")}" alt="Ovi Design Academy" class="footer-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="footer-logo-fallback"><span class="mark">O</span>ovi<span class="text-violet">.</span></span></div>
+            <div class="footer-logo"><img src="${oviSiteUrl("image/brand/logo.webp")}" alt="Ovi Design Academy" class="footer-logo-img" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"><span class="footer-logo-fallback"><span class="mark">O</span>ovi<span class="text-violet">.</span></span></div>
             <p>Transforming beginners into industry-ready UX/UI designers. Startup India recognised · Figma Authorised Training Partner.</p>
             <div class="badges"><span class="bg-pill">Startup India</span><span class="bg-pill">Figma Partner</span><span class="bg-pill">ISO Certified</span></div>
             <div class="socials">
@@ -692,7 +692,7 @@ document.addEventListener("DOMContentLoaded", sortStudentWorkByBatch);
 const PROMO_BANNER = {
   enabled: true,
   id: "vijayadasami-offer-2026",
-  image: "/image/vijayadasami-offer-poster.jpg",
+  image: "/image/promos/vijayadasami-offer-poster.webp",
   imageAlt: "Ovi Design Academy Vijayadasami offer poster: admissions and demo classes are open for the Design Engineer course.",
   eyebrow: "Vijayadasami Offer",
   title: "Next UX UI + Ai Vibe Design (Design Engineer) batch starts soon",
@@ -1430,7 +1430,24 @@ document.addEventListener("DOMContentLoaded", () => {
     modalPanel.setAttribute("tabindex", "-1");
   }
 
-  window.setTimeout(openPromo, Number(campaign.showDelay) || 0);
+  // Show the promo once per browser visit (session), not on every page load.
+  const promoSeenKey = `ovi-promo-seen:${campaign.id || "default"}`;
+  let promoSeen = false;
+  try {
+    promoSeen = window.sessionStorage.getItem(promoSeenKey) === "1";
+  } catch (error) {
+    promoSeen = false;
+  }
+  if (!promoSeen) {
+    window.setTimeout(() => {
+      try {
+        window.sessionStorage.setItem(promoSeenKey, "1");
+      } catch (error) {
+        // Storage can be blocked (private mode); the promo still shows.
+      }
+      openPromo();
+    }, Number(campaign.showDelay) || 0);
+  }
 });
 
 function initInstagramEmbeds() {
@@ -1801,16 +1818,16 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderPortfolio() {
     const el = document.getElementById("portfolioGrid");
     if (!el) return;
-    el.innerHTML = coursePortfolio.map((project, index) => {
+    el.innerHTML = coursePortfolio.map((project) => {
       const studentParts = project.ps.replace(/^By\s+/i, "").split("·").map((part) => part.trim()).filter(Boolean);
       const studentName = studentParts[0] || "Student";
-      const batchNo = studentParts.find((part) => /batch/i.test(part)) || `Batch ${String(index + 1).padStart(2, "0")}`;
+      const batchNo = studentParts.find((part) => /batch/i.test(part));
       const courseLabel = Array.isArray(project.tags) && project.tags.length ? project.tags.join(" · ") : "Student Portfolio";
 
       return `
       <article class="student-work-card reveal">
         <div class="work-thumb">
-          <img src="${oviSiteUrl(project.img)}" alt="${project.pt} case study thumbnail by ${studentName}" loading="lazy" />
+          <img src="${oviSiteUrl(project.img)}" alt="${project.alt || `${project.pt} UI UX case study by ${studentName}`}" loading="lazy" />
         </div>
         <div class="work-card-top">
           <span class="work-course">${courseLabel}</span>
@@ -1819,9 +1836,9 @@ document.addEventListener("DOMContentLoaded", () => {
         <dl>
           <div><dt>Student Name</dt><dd>${studentName}</dd></div>
           <div><dt>Project Name</dt><dd>${project.pt}</dd></div>
-          <div><dt>Batch No</dt><dd>${batchNo}</dd></div>
+          ${batchNo ? `<div><dt>Batch No</dt><dd>${batchNo}</dd></div>` : ""}
         </dl>
-        <a href="https://www.behance.net/" class="work-behance-btn" target="_blank" rel="noopener" aria-label="View ${project.pt} on Behance">View on Behance</a>
+        <a href="${project.url || "https://www.behance.net/ovidesignacademy"}" class="work-behance-btn" target="_blank" rel="noopener" aria-label="View ${project.pt} case study by ${studentName}">View Case Study</a>
       </article>`;
     }).join("");
     revealInserted(el);
@@ -1830,35 +1847,20 @@ document.addEventListener("DOMContentLoaded", () => {
   function renderLogos() {
     const el = document.getElementById("logosRow");
     if (!el) return;
-    const placementLogoMap = {
-      zoho: "image/placements-logo/Zoho 1.png",
-      verizon: "image/placements-logo/Verizon-Logo 1.png",
-      freshworks: "image/placements-logo/Appydesign-logo-new 1.png",
-      zerodha: "image/placements-logo/aspire-logo-violet 1.png",
-      razorpay: "image/placements-logo/claimitlogo 1.png",
-      infosys: "image/placements-logo/Wongdoody 1.png",
-      accenture: "image/placements-logo/Lamynaals_Tech_Logo-01-1 1.png",
-      pega: "image/placements-logo/Secura 1.png"
-    };
-    const fallbackLogos = [
-      { name: "Appy Design", src: "image/placements-logo/Appydesign-logo-new 1.png" },
-      { name: "Aspire", src: "image/placements-logo/aspire-logo-violet 1.png" },
-      { name: "Claimit", src: "image/placements-logo/claimitlogo 1.png" },
-      { name: "Lamynaals Tech", src: "image/placements-logo/Lamynaals_Tech_Logo-01-1 1.png" },
-      { name: "Secura", src: "image/placements-logo/Secura 1.png" },
-      { name: "Wongdoody", src: "image/placements-logo/Wongdoody 1.png" },
-      { name: "Zoho", src: "image/placements-logo/Zoho 1.png" },
-      { name: "Verizon", src: "image/placements-logo/Verizon-Logo 1.png" }
+    const placementLogos = [
+      { name: "Appy Design", src: "image/placements-logo/appy-design.png" },
+      { name: "Aspire", src: "image/placements-logo/aspire.png" },
+      { name: "ClaimIt", src: "image/placements-logo/claimit.png" },
+      { name: "Lamynaals Tech", src: "image/placements-logo/lamynaals-tech.png" },
+      { name: "Secura", src: "image/placements-logo/secura.png" },
+      { name: "Wongdoody", src: "image/placements-logo/wongdoody.png" },
+      { name: "Zoho", src: "image/placements-logo/zoho.png" },
+      { name: "Verizon", src: "image/placements-logo/verizon.png" }
     ];
-    const logoItems = courseCompanies.length
-      ? courseCompanies.map((company, index) => {
-          const fallback = fallbackLogos[index % fallbackLogos.length];
-          return {
-            name: company,
-            src: placementLogoMap[String(company).toLowerCase()] || fallback.src
-          };
-        })
-      : fallbackLogos;
+    // Only show a company whose own logo we have; never borrow another company's logo.
+    const logoByName = new Map(placementLogos.map((logo) => [logo.name.toLowerCase(), logo]));
+    const matched = courseCompanies.map((company) => logoByName.get(String(company).toLowerCase())).filter(Boolean);
+    const logoItems = matched.length ? matched : placementLogos;
     const logos = logoItems.map((company) => `
       <span class="logo-name">
         <img src="${oviSiteUrl(company.src)}" alt="${company.name} placement logo" loading="lazy" />

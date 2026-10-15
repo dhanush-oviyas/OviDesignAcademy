@@ -3,7 +3,7 @@
   // Research → Design → Prototype → Build tick past with a % counter, then
   // four layers wipe upward to reveal the page.
   const scriptUrl = document.currentScript.src;
-  const logoUrl = new URL('image/logo-white.png', scriptUrl).href;
+  const logoUrl = new URL('image/brand/logo-white.webp', scriptUrl).href;
   const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)')?.matches === true;
   // Min time lets the build animation finish; max keeps a slow asset from blocking the page.
   const MIN_TIME = 2400;
