@@ -2316,12 +2316,6 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   height:16px;
 }
 
-.course-page .side-related{
-  display:flex;
-  flex-direction:column;
-  gap:.85rem;
-}
-
 .course-page .rel-card{
   position:relative;
   display:block;
@@ -2332,6 +2326,9 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
 }
 
 .course-page .rel-card:hover{transform:translateY(-3px)}
+.course-page .rel-card.rel-a{background:linear-gradient(160deg,#3b54d9,#2a3fa5);color:#fff}
+.course-page .rel-card.rel-b{background:linear-gradient(160deg,#d1844a,#e9824c);color:var(--ink)}
+.course-page .rel-card.rel-c{background:linear-gradient(160deg,var(--ink),#2d2a4e);color:var(--cream)}
 
 .course-page .rel-top{
   display:flex;
@@ -2362,7 +2359,7 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   opacity:1;
 }
 
-.course-page .rel-card h4{
+.course-page .rel-card h3{
   font-family:"Space Grotesk";
   font-weight:700;
   font-size:1.05rem;
@@ -2404,6 +2401,33 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   display:inline-block;
   font-weight:600;
 }
+
+.course-page .rel-card.rel-b .rel-emi{
+  background:rgba(26,24,48,.12);
+}
+
+.course-page .related-courses{padding:4rem 0 1rem}
+.course-page .related-courses-head{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:1.25rem;
+  margin-bottom:2rem;
+}
+.course-page .related-courses-head .h-display{margin-top:.75rem}
+.course-page .related-courses-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:1.25rem;
+}
+@media(min-width:768px){
+  .course-page .related-courses-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+.course-page .related-courses .rel-card{padding:1.6rem 1.75rem;border-radius:1.25rem}
+.course-page .related-courses .rel-card h3{font-size:1.35rem}
+.course-page .related-courses .rel-card p{font-size:.9rem;max-width:36rem}
+.course-page .related-courses .rel-meta{font-size:.75rem}
 
 .course-page .about-split{
   margin-top:2rem;
@@ -3465,6 +3489,18 @@ a.logo[aria-current="page"]{color:var(--violet);font-weight:600}
   color:#fff;
   font-size:1rem;
   overflow:hidden;
+}
+
+.course-page .tool-card .icon-brand{
+  background:#fff;
+  border:1px solid var(--border);
+}
+
+.course-page .tool-card .icon-brand img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+  display:block;
 }
 
 .course-page .tool-card .icon svg{

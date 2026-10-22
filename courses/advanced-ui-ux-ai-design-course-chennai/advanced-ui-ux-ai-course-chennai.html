@@ -170,7 +170,7 @@
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" />
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
 <noscript><link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" /></noscript>
-<link rel="stylesheet" href="../../styles.css?v=39" />
+<link rel="stylesheet" href="../../styles.css?v=40" />
 </head>
 <body class="course-page">
 <script src="../../preloader.js?v=7"></script>
@@ -205,7 +205,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
         </a>
         <a href="#curriculum" class="btn btn-outline">See Curriculum</a>
-        <a href="/brochure/advanced-ui-ux-ai-design-course-brochure.pdf" class="btn btn-outline" download="Advanced-UI-UX-AI-Design-Course-Brochure.pdf" target="_blank" rel="noopener">Download Brochure
+        <a href="/brochure/advanced-ui-ux-ai-design-course-brochure.pdf" class="btn btn-outline" target="_blank" rel="noopener">Download Brochure
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" /><polyline points="7 10 12 15 17 10" /><line x1="12" y1="15" x2="12" y2="3" /></svg>
         </a>
       </div>
@@ -419,7 +419,7 @@
         <div>
           <div class="eyebrow" style="color:rgba(246,243,234,0.65)"><span class="bar" style="background:var(--lime)"></span> Free demo · Batch info</div>
           <h3 style="margin-top:.75rem">Attend a <span class="i">free 1-hour demo</span> before you decide.</h3>
-          <p class="sub">Meet the mentor, walk through the syllabus and portfolio bar, ask anything. Every Thursday + Saturday. Next cohort starts <b style="color:var(--lime)" data-next-batch-long>10 September 2026</b>.</p>
+          <p class="sub">Meet the mentor, walk through the syllabus and portfolio bar, ask anything. Every Thursday + Saturday. Next batch starts <b style="color:var(--lime)" data-next-batch-long>10 September 2026</b>.</p>
         </div>
         <form class="mid-form" id="midForm">
           <span class="seats">● Only 4 seats left in this batch</span>
@@ -486,7 +486,7 @@
         <div class="side-price">
           <span class="side-eyebrow">Advanced UX/UI + AI Leadership Program</span>
           <div class="side-fee"><span class="side-fee-was">₹24,999</span><span class="side-fee-now">₹18,999</span><span class="side-fee-tag">Early Bird</span></div>
-          <div class="side-title">Cohort 1 <span class="side-dot"></span></div>
+          <div class="side-title">Key Details <span class="side-dot"></span></div>
         </div>
         <ul class="side-facts">
           <li><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg> Duration</span><b>5 Weeks · 15 Live Classes</b></li>
@@ -506,17 +506,25 @@
           Chat on WhatsApp
         </a>
       </div>
-
-      <div class="side-card side-related">
-        <div class="side-eyebrow"><span class="bar"></span> Related courses</div>
-        <div id="relatedCourses" style="gap: 12px; display: flex; flex-direction: column;"></div>
-        <a href="/#cta" class="btn btn-lime side-cta" style="margin-top:.5rem" data-demo-open>Free demo for any course
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
-        </a>
-      </div>
     </div>
   </aside>
 </div>
+
+<!-- Related courses -->
+<section class="related-courses" aria-labelledby="related-courses-title">
+  <div class="container-x">
+    <div class="related-courses-head reveal">
+      <div>
+        <div class="eyebrow"><span class="bar"></span> Related courses</div>
+        <h2 id="related-courses-title" class="h-display">Explore <span class="i">more courses.</span></h2>
+      </div>
+      <a href="/#cta" class="btn btn-lime related-courses-cta" data-demo-open>Free demo for any course
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7" /><polyline points="7 7 17 7 17 17" /></svg>
+        </a>
+    </div>
+    <div id="relatedCourses" class="related-courses-grid"></div>
+  </div>
+</section>
 
 <!-- Final CTA -->
 <section class="final">
@@ -557,7 +565,9 @@ var phases = [
 var aiTools = [
   { nm: "Figma AI", use: "Design & prototype", bg: "#a259ff" },
   { nm: "ChatGPT", use: "UX writing", bg: "#10a37f" },
+  { nm: "Claude", use: "Long-form copy", bg: "#c96442" },
   { nm: "Midjourney", use: "Moodboards", bg: "#1a1830" },
+  { nm: "Lovable", use: "Ship prototypes", bg: "#7c3bd9" },
   { nm: "Uizard", use: "Wireframe AI", bg: "#ff5c8a" },
   { nm: "Galileo", use: "Screen gen", bg: "#3b54d9" },
   { nm: "Framer AI", use: "Site build", bg: "#0055ff" },
@@ -573,10 +583,8 @@ var aiTools = [
   { nm: "Recraft", use: "Vectors & icons", bg: "#ff2d55" },
   { nm: "Ideogram", use: "UI mockups", bg: "#0f766e" },
   { nm: "Perplexity", use: "Research", bg: "#20808d" },
-  { nm: "Claude", use: "Long-form copy", bg: "#c96442" },
   { nm: "Descript", use: "Case study video", bg: "#f24e1e" },
   { nm: "Cursor", use: "Design-to-code", bg: "#1a1830" },
-  { nm: "Lovable", use: "Ship prototypes", bg: "#7c3bd9" },
 ];
 var toolsSummaryCard = { nm: "+20", use: "AI tools" };
 var companies = ["Appy Design", "Aspire", "ClaimIt", "Lamynaals Tech", "Secura", "Wongdoody", "Zoho", "Verizon"];
@@ -630,6 +638,6 @@ var marqueeWords = ["IDEATE", "RESEARCH", "DEFINE", "DESIGN", "PROTOTYPE", "BUIL
 
 
 </script>
-<script src="../../script.js?v=22" defer></script>
+<script src="../../script.js?v=23" defer></script>
 </body>
 </html>

@@ -1785,10 +1785,27 @@ document.addEventListener("DOMContentLoaded", () => {
       }
       return `<svg viewBox="0 0 36 36" aria-hidden="true"><rect x="7" y="7" width="22" height="22" rx="8" fill="${fill}"/><text x="18" y="22.5" text-anchor="middle" fill="#fff" font-size="9.5" font-weight="800" font-family="Inter, Arial">${mono}</text></svg>`;
     };
+    // Official brand marks (LobeHub Icons, MIT; Simple Icons, CC0) for tools that have one.
+    const toolLogoFiles = {
+      "Figma AI": "image/ai-tools/figma.svg",
+      "ChatGPT": "image/ai-tools/chatgpt.svg",
+      "Claude": "image/ai-tools/claude.svg",
+      "Midjourney": "image/ai-tools/midjourney.svg",
+      "Lovable": "image/ai-tools/lovable.svg",
+      "Perplexity": "image/ai-tools/perplexity.svg",
+      "Cursor": "image/ai-tools/cursor.svg",
+      "Notion AI": "image/ai-tools/notion.svg",
+      "Runway": "image/ai-tools/runway.svg",
+      "Recraft": "image/ai-tools/recraft.svg",
+      "Ideogram": "image/ai-tools/ideogram.svg",
+      "Miro AI": "image/ai-tools/miro.svg",
+      "Framer AI": "image/ai-tools/framer.svg",
+      "Maze AI": "image/ai-tools/maze.svg"
+    };
     const visibleTools = courseToolsSummaryCard ? courseTools.slice(0, 5) : courseTools;
     const toolCards = visibleTools.map((tool) => `
       <div class="tool-card">
-        <div class="icon" style="background:${tool.bg}">${toolLogo(tool)}</div>
+        ${toolLogoFiles[tool.nm] ? `<div class="icon icon-brand"><img src="${oviSiteUrl(toolLogoFiles[tool.nm])}" alt="${tool.nm} logo" width="28" height="28" loading="lazy" /></div>` : `<div class="icon" style="background:${tool.bg}">${toolLogo(tool)}</div>`}
         <div class="nm">${tool.nm}</div>
         <div class="use">${tool.use}</div>
       </div>`);
@@ -1921,7 +1938,7 @@ document.addEventListener("DOMContentLoaded", () => {
           <span class="rel-tag">${course.tag}</span>
           ${Icon.arrow()}
         </div>
-        <h4>${course.h}</h4>
+        <h3>${course.h}</h3>
         <p>${course.p}</p>
         <div class="rel-meta">
           <span>${Icon.clock()} ${course.dur}</span>
