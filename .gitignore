@@ -3,3 +3,6 @@
 
 # Deployment archives
 *.zip
+
+# Local archived demo project (separate Git repository)
+unused/demo-class/
